@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="intro-y flex items-center mt-8">
+    <h2 class="text-lg font-medium mr-auto">
+        Course List
+    </h2>
+</div>
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 lg:col-span-12">
+        <!-- BEGIN: Input -->
+        <div class="intro-y box">
+            {% for message in messages %}
+                <div class="alert alert-primary alert-dismissible show flex items-center" role="alert">
+                     ✔ {{ message }} 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> <i data-feather="x" class="w-4 h-4"></i> </button>
+                </div>
+            {% endfor %}
+            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                <h2 class="font-medium text-base mr-auto">
+                    Course List
+                </h2>
+            </div>
+            <div id="input" class="p-5">
+                <div class="preview">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div>
+                            <label for="regular-form-1" class="form-label">Add new Course *</label>
+                            <input id="regular-form-1" name="course-name" type="text" class="form-control" placeholder="Add new Course" required>
+                        </div>
+                        <!-- <button class="btn btn-primary mt-5">Login</button> -->
+                        <input class="btn btn-primary mt-5" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END: Input -->
+    </div>
+</div>
+
+<div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
+    <table class="table table-report sm:mt-2">
+        <thead>
+            <tr>
+                <th class="whitespace-nowrap">Course ID</th>
+                <th class="whitespace-nowrap">Course Name</th>
+                <th class="whitespace-nowrap">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+                <tr class="intro-x">
+                    <td>{{course.id}}</td>
+                    <td>{{course.name}}</td>
+                    <td class="table-report__action w-56">
+                        <div class="flex">
+                            <a class="flex text-theme-24" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal{{course.id}}"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                        </div>
+                    </td>
+                </tr>
+                <div id="delete-confirmation-modal{{course.id}}" class="modal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body p-0">
+                                <div class="p-5 text-center">
+                                    <i data-feather="x-circle" class="w-16 h-16 text-theme-24 mx-auto mt-3"></i> 
+                                    <div class="text-3xl mt-5">Are you sure?</div>
+                                    <div class="text-gray-600 mt-2">
+                                        Do you really want to delete {{course.name}} records? 
+                                        <br>
+                                        This process cannot be undone.
+                                    </div>
+                                </div>
+                                <div class="px-5 pb-8 text-center">
+                                    <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
+                                    <a href="/delete-course/{{course.id}}" class="btn btn-danger w-24">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="intro-y flex items-center mt-8">
+    <h2 class="text-lg font-medium mr-auto">
+        New Student Form
+    </h2>
+</div>
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 lg:col-span-12">
+        <!-- BEGIN: Input -->
+        <div class="intro-y box">
+            {% for message in messages %}
+                {% if 'already' in message %}
+                    <div class="alert alert-danger alert-dismissible show flex items-center" role="alert">
+                        {{ message }} 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> <i data-feather="x" class="w-4 h-4"></i> </button>
+                    </div>
+                {% else %}
+                    <div class="alert alert-primary alert-dismissible show flex items-center" role="alert">
+                        ✔ {{ message }} 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> <i data-feather="x" class="w-4 h-4"></i> </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                <h2 class="font-medium text-base mr-auto">
+                    New Student
+                </h2>
+            </div>
+            <div id="input" class="p-5">
+                <div class="preview">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div>
+                            <label for="regular-form-1" class="form-label">Name *</label>
+                            <input id="regular-form-1" name="name" value="{{student.name}}" type="text" class="form-control" placeholder="Student Name">
+                        </div> <br>
+                        <div>
+                            <label for="regular-form-1" class="form-label">Course Name *</label>
+                            <div>
+                                {% if student.course_name %}
+                                    <select name="course" data-placeholder="Select your favorite actors" class="form-control-rounded tom-select w-full">
+                                        {% for course in courses %}
+                                            {% if course.name == student.course_name %}
+                                                <option value="{{course.name}}" selected>{{course.name}}</option>
+                                            {% else %}
+                                                <option value="{{course.name}}">{{course.name}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                {% else %}
+                                    <select name="course" data-placeholder="Select your favorite actors" class="form-control-rounded tom-select w-full">
+                                        {% for course in courses %}
+                                            <option value="{{course.name}}">{{course.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                {% endif %}
+                            </div>
+                        </div> <br>
+                        <div>
+                            <label for="regular-form-1" class="form-label">Mobile Number *</label>
+                            <input id="regular-form-1" name="mobile" value="{{student.mobile_number}}" type="number" class="form-control" placeholder="Mobile Number">
+                        </div> <br>
+                        <div>
+                            <label for="regular-form-1" class="form-label">Email ID *</label>
+                            <input id="regular-form-1" name="email" value="{{student.email}}" type="email" class="form-control" placeholder="Email-ID">
+                        </div> <br>
+                        <div>
+                            <label for="regular-form-1" class="form-label">Course Fees Amount *</label>
+                            <input id="regular-form-1" name="fees_amt" value="{{student.course_fees}}" type="number" class="form-control" placeholder="Course Fees Amount">
+                        </div> <br>
+
+                        {% if student.photo %}
+                            <div>
+                                <label for="regular-form-1" class="form-label">Student Photo (Optional) </label>
+                                <input id="regular-form-1" name="photo" value="{{student.photo.url}}" type="file" class="form-control" placeholder="Student Photo">
+                            </div>
+                        {% else %}
+                            <div>
+                                <label for="regular-form-1" class="form-label">Student Photo (Optional) </label>
+                                <input id="regular-form-1" name="photo" type="file" class="form-control" placeholder="Student Photo">
+                            </div>
+                        {% endif %}
+                        <!-- <button class="btn btn-primary mt-5">Login</button> -->
+                        <input class="btn btn-primary mt-5" type="submit" value="Submit">
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- END: Input -->
+    </div>
+</div>
+{% endblock %}
