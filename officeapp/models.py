@@ -4,7 +4,7 @@ from django.db import models
 class StudentModel(models.Model):
     name = models.CharField(max_length=100, unique=True)
     course_name = models.CharField(max_length=100)
-    mobile_number = models.IntegerField()
+    mobile_number = models.BigIntegerField()
     email = models.EmailField()
     course_fees = models.FloatField()
     photo = models.ImageField(upload_to='images/', null=True, blank=True)

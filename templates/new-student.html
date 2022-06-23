@@ -34,13 +34,13 @@
                         {% csrf_token %}
                         <div>
                             <label for="regular-form-1" class="form-label">Name *</label>
-                            <input id="regular-form-1" name="name" value="{{student.name}}" type="text" class="form-control" placeholder="Student Name">
+                            <input id="regular-form-1" name="name" value="{{student.name}}" type="text" class="form-control" placeholder="Student Name" required>
                         </div> <br>
                         <div>
                             <label for="regular-form-1" class="form-label">Course Name *</label>
                             <div>
                                 {% if student.course_name %}
-                                    <select name="course" data-placeholder="Select your favorite actors" class="form-control-rounded tom-select w-full">
+                                    <select name="course" data-placeholder="Select your favorite actors" class="form-control-rounded tom-select w-full" required>
                                         {% for course in courses %}
                                             {% if course.name == student.course_name %}
                                                 <option value="{{course.name}}" selected>{{course.name}}</option>
@@ -50,7 +50,7 @@
                                         {% endfor %}
                                     </select>
                                 {% else %}
-                                    <select name="course" data-placeholder="Select your favorite actors" class="form-control-rounded tom-select w-full">
+                                    <select name="course" data-placeholder="Select your favorite actors" class="form-control-rounded tom-select w-full" required>
                                         {% for course in courses %}
                                             <option value="{{course.name}}">{{course.name}}</option>
                                         {% endfor %}
@@ -60,15 +60,15 @@
                         </div> <br>
                         <div>
                             <label for="regular-form-1" class="form-label">Mobile Number *</label>
-                            <input id="regular-form-1" name="mobile" value="{{student.mobile_number}}" type="number" class="form-control" placeholder="Mobile Number">
+                            <input id="regular-form-1" name="mobile" value="{{student.mobile_number}}" type="number" class="form-control" placeholder="Mobile Number" required>
                         </div> <br>
                         <div>
                             <label for="regular-form-1" class="form-label">Email ID *</label>
-                            <input id="regular-form-1" name="email" value="{{student.email}}" type="email" class="form-control" placeholder="Email-ID">
+                            <input id="regular-form-1" name="email" value="{{student.email}}" type="email" class="form-control" placeholder="Email-ID" required>
                         </div> <br>
                         <div>
                             <label for="regular-form-1" class="form-label">Course Fees Amount *</label>
-                            <input id="regular-form-1" name="fees_amt" value="{{student.course_fees}}" type="number" class="form-control" placeholder="Course Fees Amount">
+                            <input id="regular-form-1" name="fees_amt" value="{{student.course_fees}}" type="number" class="form-control" placeholder="Course Fees Amount" required>
                         </div> <br>
 
                         {% if student.photo %}
