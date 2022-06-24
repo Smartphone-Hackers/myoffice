@@ -175,7 +175,7 @@ class Tasks(View):
         course = models.CourseModel.objects.get(name=course)
         topics = models.CourseTopicModels.objects.filter(name=course)
 
-        selected_topic = models.CourseTopicModels.objects.get(topic=topic)
+        selected_topic = models.CourseTopicModels.objects.get(topic=topic.replace('%20', ' '))
         questions = models.CourseTasksModel.objects.filter(topics=selected_topic)
 
         total_tasks = questions.count()
