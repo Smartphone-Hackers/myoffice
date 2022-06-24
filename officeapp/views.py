@@ -1,6 +1,3 @@
-from pydoc_data.topics import topics
-from tkinter import W
-from unicodedata import name
 import django
 from django.shortcuts import redirect, render
 from django.views import View
