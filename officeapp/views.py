@@ -1,3 +1,6 @@
+from pydoc_data.topics import topics
+from tkinter import W
+from unicodedata import name
 import django
 from django.shortcuts import redirect, render
 from django.views import View
@@ -128,3 +131,63 @@ class DeleteFeesDetails(View):
         fees = models.PayeFeesModel.objects.get(id=pk)
         fees.delete()
         return redirect(f'/fees-details/{id}')
+
+class AddTopics(View):
+    template_name = 'add-topics.html'
+    def get(self, request):
+        courses = models.CourseModel.objects.all()
+        return render(request, self.template_name, context={'courses': courses})
+
+    def post(self, request):
+        course = request.POST.get('course')
+        title = request.POST.get('topic')
+
+        course_obj = models.CourseModel.objects.get(name=course)
+        add_topic = models.CourseTopicModels(name=course_obj, topic=title)
+        add_topic.save()
+
+        messages.info(request, f'New Topic "{title}" added in {course}')
+        return redirect('/add-topics')
+
+class AddTasks(View):
+    template_name = 'add-tasks.html'
+    def get(self, request):
+        courses = models.CourseModel.objects.all()
+        topics = models.CourseTopicModels.objects.all()
+        return render(request, self.template_name, context={'courses': courses, 'topics': topics})
+
+    def post(self, request):
+        course = request.POST.get('course')
+        title = request.POST.get('topic')
+        question = request.POST.get('question')
+        sample_input = request.POST.get('sample-input')
+        sample_output = request.POST.get('sample-output')
+
+        topic_obj = models.CourseTopicModels.objects.get(topic=title)
+        add_task = models.CourseTasksModel(topics=topic_obj, question=question, 
+                                            sample_input=sample_input, sample_output=sample_output)
+        add_task.save()
+
+        messages.info(request, f'New Task "{title}" added in {course}')
+        return redirect('/add-tasks')
+
+class Tasks(View):
+    template_name = 'office-tasks.html'
+    def get(self, request, course, topic):
+        courses = models.CourseModel.objects.all()
+        course = models.CourseModel.objects.get(name=course)
+        topics = models.CourseTopicModels.objects.filter(name=course)
+
+        selected_topic = models.CourseTopicModels.objects.get(topic=topic)
+        questions = models.CourseTasksModel.objects.filter(topics=selected_topic)
+
+        total_tasks = questions.count()
+
+        datas = {
+                    'courses': courses,
+                    'topics': topics,
+                    'scourse': course.name,
+                    'questions': questions,
+                    'totaltasks': total_tasks,
+                }
+        return render(request, self.template_name, context=datas)

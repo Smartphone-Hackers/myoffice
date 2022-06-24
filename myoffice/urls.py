@@ -30,6 +30,10 @@ urlpatterns = [
     path('delete-course/<int:pk>', views.DeleteCourse.as_view()),
     path('fees-details/<int:pk>', views.FeesDetails.as_view()),
     path('delete-fees-details/<int:pk>/<int:id>', views.DeleteFeesDetails.as_view()),
+    path('add-topics/', views.AddTopics.as_view(), name='add-topics'),
+    path('add-tasks/', views.AddTasks.as_view(), name='add-tasks'),
+    # Tasks
+    path('tasks/<str:course>/<str:topic>/', views.Tasks.as_view()),
 ]
 
 if settings.DEBUG:

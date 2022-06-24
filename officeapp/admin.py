@@ -5,3 +5,5 @@ from officeapp import models
 admin.site.register(models.StudentModel)
 admin.site.register(models.PayeFeesModel)
 admin.site.register(models.CourseModel)
+admin.site.register(models.CourseTasksModel)
+admin.site.register(models.CourseTopicModels)

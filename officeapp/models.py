@@ -1,3 +1,5 @@
+from pyexpat import model
+from random import sample
 from django.db import models
 
 # Create your models here.
@@ -17,3 +19,13 @@ class PayeFeesModel(models.Model):
 
 class CourseModel(models.Model):
     name = models.CharField(max_length=100)
+
+class CourseTopicModels(models.Model):
+    name = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
+    topic = models.CharField(max_length=500)
+
+class CourseTasksModel(models.Model):
+    topics = models.ForeignKey(CourseTopicModels, on_delete=models.CASCADE)
+    question = models.TextField()
+    sample_input = models.TextField(null=True)
+    sample_output = models.TextField(null=True)

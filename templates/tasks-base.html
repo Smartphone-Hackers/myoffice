@@ -9,7 +9,7 @@
         <meta name="description" content="Icewall admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
         <meta name="keywords" content="admin template, Icewall Admin Template, dashboard template, flat admin template, responsive admin template, web app">
         <meta name="author" content="LEFT4CODE">
-        <title>Great Minds</title>
+        <title>Great Minds Tasks</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{% static 'dist/css/app.css' %}" />
         <!-- END: CSS Assets-->
@@ -25,48 +25,23 @@
                 <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
             </div>
             <ul class="border-t border-theme-2 py-5 hidden">
-                <li>
-                    <a href="/" class="menu">
-                        <div class="menu__icon"> <i data-feather="users"></i> </div>
-                        <div class="menu__title"> Users </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'new-student' %}" class="menu">
-                        <div class="menu__icon"> <i data-feather="users"></i> </div>
-                        <div class="menu__title"> New Student </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'course-list' %}" class="menu">
-                        <div class="menu__icon"> <i data-feather="users"></i> </div>
-                        <div class="menu__title"> Course List </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'pay-fees' %}" class="menu">
-                        <div class="menu__icon"> <i data-feather="users"></i> </div>
-                        <div class="menu__title"> Pay Fees </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'add-topics' %}" class="menu">
-                        <div class="menu__icon"> <i data-feather="users"></i> </div>
-                        <div class="menu__title"> Add Topics </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'add-tasks' %}" class="menu">
-                        <div class="menu__icon"> <i data-feather="users"></i> </div>
-                        <div class="menu__title"> Add Tasks </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/tasks/Python/Print Function" class="menu">
-                        <div class="menu__icon"> <i data-feather="users"></i> </div>
-                        <div class="menu__title"> Tasks List </div>
-                    </a>
-                </li>
+                {% for course in courses %}
+                    {% if course.name == 'Python' %}
+                        <li>
+                            <a href="/tasks/{{course}}/Print Function" class="menu">
+                                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                                <div class="menu__title"> {{course}} </div>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="/tasks/{{course}}" class="menu">
+                                <div class="menu__icon"> <i data-feather="users"></i> </div>
+                                <div class="menu__title"> {{course}} </div>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </div>
         <!-- END: Mobile Menu -->
@@ -107,48 +82,23 @@
                 <!-- BEGIN: Side Menu -->
                 <nav class="side-nav">
                     <ul>
-                        <li>
-                            <a href="/" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                                <div class="side-menu__title"> Users </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'new-student' %}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                                <div class="side-menu__title"> New Student </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'course-list' %}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                                <div class="side-menu__title"> Course List </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'pay-fees' %}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                                <div class="side-menu__title"> Pay Fees </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'add-topics' %}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                                <div class="side-menu__title"> Add Topics </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'add-tasks' %}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                                <div class="side-menu__title"> Add Tasks </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/tasks/Python/Print Function" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                                <div class="side-menu__title"> Tasks List </div>
-                            </a>
-                        </li>
+                        {% for course in courses %}
+                            {% if course.name == 'Python' %}
+                                <li>
+                                    <a href="/tasks/{{course.name}}/Print Function" class="side-menu">
+                                        <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                                        <div class="side-menu__title"> {{course.name}} </div>
+                                    </a>
+                                </li>
+                            {% else %}
+                            <li>
+                                <a href="/tasks/{{course.name}}" class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                                    <div class="side-menu__title"> {{course.name}} </div>
+                                </a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                 </nav>
                 <!-- END: Side Menu -->

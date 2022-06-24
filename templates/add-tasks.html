@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="intro-y flex items-center mt-8">
+    <h2 class="text-lg font-medium mr-auto">
+        Add Topics
+    </h2>
+</div>
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 lg:col-span-12">
+        <!-- BEGIN: Input -->
+        <div class="intro-y box">
+            {% for message in messages %}
+                <div class="alert alert-primary alert-dismissible show flex items-center" role="alert">
+                     ✔ {{ message }} 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> <i data-feather="x" class="w-4 h-4"></i> </button>
+                </div>
+            {% endfor %}
+            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                <h2 class="font-medium text-base mr-auto">
+                    Student Fees
+                </h2>
+            </div>
+            <div id="input" class="p-5">
+                <div class="preview">
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div>
+                            <label for="regular-form-1" class="form-label">Course *</label>
+                            <div>
+                                <select name="course" class="form-control-rounded tom-select w-full" required>
+                                    <option value="">None</option>
+                                    {% for course in courses %}
+                                        <option value="{{course.name}}">{{course.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div> <br>
+                        <div>
+                            <label for="regular-form-1" class="form-label">Topic Name *</label>
+                            <div>
+                                <select name="topic" class="form-control-rounded tom-select w-full" required>
+                                    <option value="">None</option>
+                                    {% for topic in topics %}
+                                        <option value="{{topic.topic}}">{{topic.topic}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div> <br>
+                        <div>
+                            <label for="regular-form-1" class="form-label">Question *</label>
+                            <input id="regular-form-1" name="question" type="text" class="form-control" placeholder="Question" required>
+                        </div> <br>
+                        <div>
+                            <label for="regular-form-1" class="form-label">Sample Input</label>
+                            <input id="regular-form-1" name="sample-input" type="text" class="form-control" placeholder="Sample Input">
+                        </div> <br>
+                        <div>
+                            <label for="regular-form-1" class="form-label">Sample Output</label>
+                            <input id="regular-form-1" name="sample-output" type="text" class="form-control" placeholder="Sample Output">
+                        </div>
+                        <!-- <button class="btn btn-primary mt-5">Login</button> -->
+                        <input class="btn btn-primary mt-5" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END: Input -->
+    </div>
+</div>
+{% endblock %}
