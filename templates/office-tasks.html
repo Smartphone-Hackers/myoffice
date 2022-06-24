@@ -51,7 +51,9 @@
                         <div class="" aria-labelledby="faq-accordion-content-2">
                             <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                 <p>Sample Input</p>
-                                {{question.sample_input}} 
+                                {% autoescape off %}
+                                    {{question.sample_input}} 
+                                {% endautoescape %}
                             </div>
                         </div>
                     </div>
@@ -62,7 +64,9 @@
                         <div class="" aria-labelledby="faq-accordion-content-3">
                             <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed"> 
                                 <p>Sample Output</p>
-                                {{ question.sample_output }} 
+                                {% autoescape off %}
+                                    {{ question.sample_output }} 
+                                {% endautoescape %}
                             </div>
                         </div>
                     </div>
