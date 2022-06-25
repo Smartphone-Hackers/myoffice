@@ -1,3 +1,4 @@
+from pydoc_data.topics import topics
 from pyexpat import model
 from random import sample
 from django.db import models
@@ -29,3 +30,6 @@ class CourseTasksModel(models.Model):
     question = models.TextField()
     sample_input = models.TextField(null=True)
     sample_output = models.TextField(null=True)
+
+    def __str__(self):
+        return f"{self.topics.name.name} -> {self.question}"
