@@ -29,7 +29,7 @@
     <!-- BEGIN: FAQ Content -->
     <div class="intro-y col-span-12 lg:col-span-8 xl:col-span-9">
         {% for question in questions %}
-            <div class="intro-y box lg:mt-5">
+            <div class="intro-y box lg:mt-5" onmousedown="return false" onselect="return false">
                 <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">
                         Task {{ forloop.counter }}
