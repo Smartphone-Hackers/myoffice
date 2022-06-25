@@ -179,7 +179,7 @@ class Tasks(View):
         selected_topic = models.CourseTopicModels.objects.get(topic=topic)
         questions = models.CourseTasksModel.objects.filter(topics=selected_topic)
         
-        total_tasks = questions.count()
+        total_tasks = models.CourseTasksModel.objects.count()
 
         datas = {
                     'courses': courses,
