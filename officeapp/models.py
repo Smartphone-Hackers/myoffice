@@ -1,7 +1,3 @@
-from pydoc_data.topics import topics
-from pyexpat import model
-from random import sample
-from tkinter.tix import Tree
 from django.db import models
 
 # Create your models here.
