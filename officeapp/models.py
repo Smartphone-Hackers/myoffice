@@ -1,6 +1,7 @@
 from pydoc_data.topics import topics
 from pyexpat import model
 from random import sample
+from tkinter.tix import Tree
 from django.db import models
 
 # Create your models here.
@@ -10,7 +11,11 @@ class StudentModel(models.Model):
     mobile_number = models.BigIntegerField()
     email = models.EmailField()
     course_fees = models.FloatField()
-    photo = models.ImageField(upload_to='images/', null=True, blank=True)
+    address = models.TextField(null=True)
+    photo = models.URLField(null=True)
+
+    def __str__(self):
+        return f"{self.name}"
 
 class PayeFeesModel(models.Model):
     name = models.ForeignKey(StudentModel, on_delete=models.CASCADE)
@@ -18,12 +23,21 @@ class PayeFeesModel(models.Model):
     fees_amt = models.FloatField()
     description = models.TextField()
 
+    def __str__(self):
+        return f"{self.name.name} -> {self.fees_amt}"
+
 class CourseModel(models.Model):
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name}"
 
 class CourseTopicModels(models.Model):
     name = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     topic = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f"{self.name.name} -> {self.topic}"
 
 class CourseTasksModel(models.Model):
     topics = models.ForeignKey(CourseTopicModels, on_delete=models.CASCADE)

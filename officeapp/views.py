@@ -174,8 +174,7 @@ class Tasks(View):
         courses = models.CourseModel.objects.all()
         course = models.CourseModel.objects.get(name=course)
         topics = models.CourseTopicModels.objects.filter(name=course)
-        print(topic)
-        print([data.topic for data in models.CourseTopicModels.objects.all()])
+        
         selected_topic = models.CourseTopicModels.objects.get(topic=topic)
         questions = models.CourseTasksModel.objects.filter(topics=selected_topic)
         
