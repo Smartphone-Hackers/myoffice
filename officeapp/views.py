@@ -4,6 +4,7 @@ from django.views import View
 from django.contrib import messages
 from django.db.models import Sum
 from officeapp import models
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 class Home(View):
